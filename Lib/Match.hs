@@ -9,3 +9,4 @@ match wanted (y:ys)
   | take (length wanted) (y:ys) == wanted = True
   | otherwise                             = match wanted ys
 
+notMatch a b = not (match a b)

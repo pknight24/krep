@@ -1,12 +1,17 @@
+import Data.List
 import Control.Monad
-import Lib.Match
+import Control.Concurrent
 import System.Environment
+import Lib.Match
+import Lib.ArgParser
+import Lib.Run
 
 --searches for arg1 in text passed via stdin (similar usage to grep)
 main = do
   source <- getContents
-  args <- getArgs
-  let wanted = head args
+  wanted <- getWanted
+  opts <- getOpts
   let l = lines source
-  let onlyMatches = filter (match wanted) l
-  forM onlyMatches (\s -> putStrLn s)
+  matches <- mapM (\w -> interpret w opts l) wanted
+  let trimmedMatches = nub $ concat matches
+  forM_ trimmedMatches (\t -> putStrLn t)
