@@ -9,31 +9,3 @@ match wanted (y:ys)
   | take (length wanted) (y:ys) == wanted = True
   | otherwise                             = match wanted ys
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
