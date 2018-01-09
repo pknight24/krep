@@ -12,6 +12,5 @@ main = do
   wanted <- getWanted
   opts <- getOpts
   let l = lines source
-  matches <- mapM (\w -> interpret w opts l) wanted
-  let trimmedMatches = nub $ concat matches
-  forM_ trimmedMatches (\t -> putStrLn t)
+  results <- interpret wanted opts l
+  forM_ results (\r -> putStrLn r)

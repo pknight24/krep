@@ -1,5 +1,6 @@
 module Lib.ArgParser where
 
+import Data.List
 import System.Environment
 
 --define all possible options in the Opts data type
