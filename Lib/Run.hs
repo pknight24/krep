@@ -17,7 +17,7 @@ interpret w (Opts False) s = do
   return $ concat ran
 interpret w (Opts True) s = do
   ranX <- mapM (runX s) w
-  return $ concat ranX
+  return $ foldl1 inBoth ranX
 
 --runs the program normally, gets all the items passed by stdin that contain the wanted string
 run :: [String] -> String -> IO [String]
