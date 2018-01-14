@@ -3,11 +3,12 @@ module Lib.Run where
 import Data.List
 import Lib.ArgParser
 import Lib.Match
+import Lib.Types
 import Control.Monad
 
 --checks for options and calls different run functions based on what is true
 --interpret now takes all of the wanted search terms and handles them, rather than handling them in krep.hs
-interpret :: [String] -> Opts -> [String] -> IO [String]
+interpret :: SearchTerms -> Opts -> Source -> IO Results
 interpret [] _  _ = do
   return ["Error: no argument passed to interpret"]
 interpret _ _ [] = do
@@ -20,7 +21,7 @@ interpret w (Opts True) s = do
   return $ foldl1 inBoth ranX
 
 --runs the program normally, gets all the items passed by stdin that contain the wanted string
-run :: [String] -> String -> IO [String]
+run :: Source -> Term -> IO Results
 run []  _ = do
   return ["Error: no argument passed to run"]
 run s w = do
@@ -28,7 +29,7 @@ run s w = do
   return onlyMatches
 
 --runs the program, but excludes the argument w rather than checking for matches
-runX :: [String] -> String -> IO [String]
+runX :: Source -> Term -> IO Results
 runX []  _ = do
   return ["Error: no argument passed to runX"]
 runX s w = do
