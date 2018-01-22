@@ -35,4 +35,3 @@ runX []  _ = do
 runX s w = do
   let notMatches = filter (notMatch w) s
   return notMatches
-

@@ -6,7 +6,9 @@ import Lib.Match
 import Lib.ArgParser
 import Lib.Run
 
---searches for arg1 in text passed via stdin (similar usage to grep)
+--searches for all args in text passed via stdin (similar usage to grep)
+--FLAGS:
+---- -x: exlcude all search terms
 main = do
   source <- getContents
   wanted <- getWanted
