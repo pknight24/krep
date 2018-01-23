@@ -1,13 +1,14 @@
 module Lib.Match where
+import Text.Parsec
+import Text.Parsec.String
 
 
 match :: String -> String -> Bool
 match "" _ = True
 match _ "" = False
-match wanted (y:ys)
-  | length wanted > length (y:ys)         = False
-  | take (length wanted) (y:ys) == wanted = True
-  | otherwise                             = match wanted ys
+match wanted (y:ys) = case parse (string wanted) "krep" (y:ys) of
+  (Left _) -> match wanted ys
+  (Right _) -> True
 
 notMatch a b = not (match a b)
 
